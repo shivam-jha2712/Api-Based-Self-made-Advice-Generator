@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advice Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="content">
+        <p class="advice"></p>
+        <button class="btn">New Advice</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+<!-- 
+gcloud compute instances create nucleus-jumphost \
+        --network nucleus-vpc \
+        --zone us-east1-b \
+        --machine-type f1-micro \
+        --image-family debian-9 \
+        --image-project debian-cloud \ -->
+
+<!-- gcloud container clusters create nucleus-backend \
+        --num-nodes 1 \
+        --network nucleus-vpc \
+        --region us-east1
+gcloud container clusters get-credentials nucleus-backend \
+        --region us-east1 -->
+
+<!-- kubectl create deployement hello-server \
+        --image-gcr.io/google-samples/hello-app:2.0 -->
+
+<!-- kubectl expose deployement hello-server \
+        --type-loadBalancer \
+        --port 8080 -->
+
+
+<!-- cat << EOF > startup.sh 
+#! /bin/bash
+apt-get update
+apt-get install -y ngnix
+service ngnix start
+sed -i -- 's/ngnix/Google Cloud Platform - '"$HOSTNAME"'/' /var/www/html/index.ngnix-debian.html
+EOF -->
+
+gcloud compute instance-templates create web-server-template \
+--metadata-from-file startup-script=startup.sh \
+--network nucleus-vpc \
+--machine-type g1-small \
+--region us-east1 \
